@@ -13,6 +13,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
+using API.interfaces;
+using API.services;
+
 namespace API
 {
     public class Startup
@@ -32,6 +35,7 @@ namespace API
             {
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
+            services.AddScoped<ITokenService, TokenService>();
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
